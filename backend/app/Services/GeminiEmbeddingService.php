@@ -63,7 +63,7 @@ class GeminiEmbeddingService
             throw new RuntimeException('Gemini API key is not configured.');
         }
 
-        $model = config('services.gemini.embedding_model');
+        $model = config('services.gemini.model');
         $endpoint = sprintf(
             'https://generativelanguage.googleapis.com/v1beta/models/%s:embedContent',
             rawurlencode($model)
