@@ -42,6 +42,22 @@ Traditional notes apps depend on exact keyword matching. This project improves t
 
 ---
 
+## ✅ Project Status
+
+| Area | Status |
+|---|---:|
+| Backend Development | Complete |
+| Frontend Development | Complete |
+| AI Summary | Complete |
+| Semantic Search | Complete |
+| REST APIs | Complete |
+| Documentation | Complete |
+| Responsive UI | Complete |
+| Testing | Complete |
+| Production Ready | Yes |
+
+---
+
 ## 🚀 Features
 
 ### Backend
@@ -228,6 +244,59 @@ AI Notes Management System/
 
 ---
 
+## 🤖 AI Tools Used
+
+| Tool | Usage |
+|---|---|
+| ChatGPT | Used for planning, architecture discussion, prompt engineering, documentation direction, and code review reasoning. |
+| OpenAI Codex | Used as an implementation and refactoring assistant while building and improving backend, frontend, and documentation code. |
+| Google Gemini API | Used inside the application for AI note summaries and semantic search with embeddings. |
+| GitHub | Used for version control workflow, repository organization, and project presentation. |
+
+---
+
+## 🧩 AI Usage Explanation
+
+AI was used as an **engineering assistant**, not as a replacement for software engineering judgment. It helped accelerate planning, implementation, debugging, and documentation while the final architectural and implementation decisions remained manual.
+
+AI assistance was used for:
+
+- Backend scaffolding and service-layer structure
+- Frontend generation and UI component composition
+- API integration between Next.js and Laravel
+- AI Summary implementation using Gemini
+- Semantic Search implementation using embeddings and cosine similarity
+- README generation and documentation refinement
+- Bug fixing suggestions and quality review
+
+Every generated or AI-assisted feature was manually:
+
+| Review Step | Completed |
+|---|---:|
+| Reviewed | Yes |
+| Tested | Yes |
+| Debugged | Yes |
+| Integrated | Yes |
+| Validated | Yes |
+
+> [!IMPORTANT]
+> AI improved development speed, but final decisions around architecture, API behavior, UI quality, error handling, and integration were made through manual engineering review.
+
+---
+
+## 📝 Prompts Used
+
+| Feature | Purpose |
+|---|---|
+| CRUD APIs | Guided the implementation of Laravel REST endpoints with validation and consistent JSON responses. |
+| AI Summary | Described how note content should be summarized, stored, and returned through the API. |
+| Semantic Search | Defined the embedding workflow, database storage, cosine similarity ranking, and search endpoint behavior. |
+| Frontend UI | Directed the creation of a modern responsive SaaS-style interface with reusable components and API integration. |
+| README | Guided the structure of a premium GitHub README suitable for recruiters and interviewers. |
+| Bug Fixing | Helped isolate root causes, verify integrations, and apply targeted fixes without redesigning the application. |
+
+---
+
 ## 🖼️ Screenshots
 
 | Dashboard | Notes |
@@ -306,7 +375,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-embedding-2
+GEMINI_MODEL=gemini-flash-latest
+GEMINI_EMBEDDING_MODEL=gemini-embedding-2
 ```
 
 > [!IMPORTANT]
@@ -345,6 +415,22 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api
 ---
 
 ## 🧪 Testing
+
+The project was manually tested across the core user and API workflows:
+
+| Area | Status |
+|---|---:|
+| Create Note | Tested |
+| Update Note | Tested |
+| Delete Note | Tested |
+| View Note | Tested |
+| Pagination | Tested |
+| AI Summary | Tested |
+| Semantic Search | Tested |
+| Validation | Tested |
+| Error Handling | Tested |
+| Responsive Design | Tested |
+| Dark Mode | Tested |
 
 ### Backend
 
@@ -414,7 +500,7 @@ This project strengthened practical experience in:
 Developed as part of the **NVECTA AI Internship Assignment**.
 
 > [!WARNING]
-> This repository is an internship assignment/project and is **not** an official NVECTA product.
+> This repository is an internship assignment/project for NVECTA and is **not** an official NVECTA product.
 
 ---
 
