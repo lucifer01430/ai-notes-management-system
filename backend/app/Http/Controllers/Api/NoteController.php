@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Note;
+use App\Services\GeminiSummaryService;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class NoteController extends Controller
 {
@@ -77,6 +80,36 @@ class NoteController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Note deleted successfully.',
+        ], 200);
+    }
+
+    /**
+     * Generate and store an AI summary for the specified resource.
+     */
+    public function summary(GeminiSummaryService $summaryService, string $id)
+    {
+        $note = Note::findOrFail($id);
+
+        try {
+            $note->update([
+                'summary' => $summaryService->generate($note->content),
+            ]);
+        } catch (Throwable $exception) {
+            Log::warning('Gemini note summary generation failed.', [
+                'note_id' => $note->id,
+                'exception' => $exception,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Unable to generate note summary at this time.',
+            ], 502);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Note summary generated successfully.',
+            'data' => $note,
         ], 200);
     }
 }
