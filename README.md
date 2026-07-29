@@ -230,8 +230,6 @@ AI Notes Management System/
 
 ## 🖼️ Screenshots
 
-> Add screenshots to the `/screenshots` directory using the filenames below.
-
 | Dashboard | Notes |
 |---|---|
 | ![Dashboard](screenshots/dashboard.png) | ![Notes](screenshots/notes.png) |
