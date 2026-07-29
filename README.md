@@ -20,8 +20,8 @@ Built with **Laravel 12**, **Next.js 15**, **Google Gemini AI**, **MySQL**, and 
 ![REST API](https://img.shields.io/badge/REST_API-JSON-111827?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-![GitHub Stars](https://img.shields.io/github/stars/your-username/ai-notes-management-system?style=for-the-badge&logo=github)
-![GitHub Last Commit](https://img.shields.io/github/last-commit/your-username/ai-notes-management-system?style=for-the-badge&logo=github)
+![GitHub Stars](https://img.shields.io/github/stars/lucifer01430/ai-notes-management-system?style=for-the-badge&logo=github)
+![GitHub Last Commit](https://img.shields.io/github/last-commit/lucifer01430/ai-notes-management-system?style=for-the-badge&logo=github)
 
 </div>
 
@@ -508,10 +508,10 @@ Developed as part of the **NVECTA AI Internship Assignment**.
 
 | Field | Link |
 |---|---|
-| Name | Your Name |
-| LinkedIn | https://linkedin.com/in/your-profile |
-| GitHub | https://github.com/your-username |
-| Portfolio | https://your-portfolio.com |
+| Name | Harsh Pandey |
+| LinkedIn | https://www.linkedin.com/in/harshpandey0143/ |
+| GitHub | https://www.github.com/lucifer01430 |
+| Portfolio | https://lucifer01430.github.io/Portfolio/ |
 
 ---
 
@@ -522,7 +522,7 @@ This project is licensed under the **MIT License**.
 ```text
 MIT License
 
-Copyright (c) 2026 Your Name
+Copyright (c) 2026 Harsh Pandey
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files, to deal in the Software
@@ -538,6 +538,8 @@ modify, merge, publish, distribute, sublicense, and/or sell copies of the Softwa
 
 If you are a recruiter, interviewer, or reviewer, this repository demonstrates a full-stack AI workflow with practical product thinking, clean API design, and a polished modern frontend.
 
-⭐ Star the repository if you find it useful.
+Thank you for reviewing this project.
+
+Feedback and suggestions are always appreciated.
 
 </div>
