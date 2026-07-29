@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Edit3, Sparkles, Trash2 } from "lucide-react";
+import { Edit3, Eye, Sparkles, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -48,6 +48,10 @@ export function NoteCard({ note, onDelete, onSummarize, isPending, showScore }: 
           ) : null}
 
           <div className="mt-auto flex flex-wrap gap-2 pt-5">
+            <Link href={`/notes/${note.id}`} className={buttonClasses("primary", "flex-1")}>
+              <Eye className="h-4 w-4" />
+              View
+            </Link>
             <Link href={`/notes/${note.id}/edit`} className={buttonClasses("secondary", "flex-1")}>
               <Edit3 className="h-4 w-4" />
               Edit
