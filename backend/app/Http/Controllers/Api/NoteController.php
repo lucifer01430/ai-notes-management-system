@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchNotesRequest;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
 use App\Models\Note;
+use App\Services\GeminiEmbeddingService;
 use App\Services\GeminiSummaryService;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -80,6 +82,45 @@ class NoteController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Note deleted successfully.',
+        ], 200);
+    }
+
+    /**
+     * Search notes by semantic similarity.
+     */
+    public function search(SearchNotesRequest $request, GeminiEmbeddingService $embeddingService)
+    {
+        try {
+            $queryEmbedding = $embeddingService->embedQuery($request->validated('query'));
+
+            $notes = Note::latest()->get()->map(function (Note $note) use ($embeddingService, $queryEmbedding): Note {
+                if (blank($note->embedding)) {
+                    $note->update([
+                        'embedding' => $embeddingService->embedNote($note),
+                    ]);
+
+                    $note->refresh();
+                }
+
+                $note->similarity_score = $embeddingService->cosineSimilarity($queryEmbedding, $note->embedding);
+
+                return $note->makeHidden('embedding');
+            })->sortByDesc('similarity_score')->values();
+        } catch (Throwable $exception) {
+            Log::warning('Gemini semantic search failed.', [
+                'exception' => $exception,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Unable to search notes at this time.',
+            ], 502);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Notes retrieved successfully.',
+            'data' => $notes,
         ], 200);
     }
 

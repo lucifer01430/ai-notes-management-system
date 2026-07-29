@@ -10,5 +10,10 @@ class Note extends Model
         'title',
         'content',
         'summary',
+        'embedding',
+    ];
+
+    protected $casts = [
+        'embedding' => 'array',
     ];
 }
