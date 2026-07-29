@@ -14,6 +14,8 @@ import { Pagination } from "@/components/ui/pagination";
 import { NoteGridSkeleton } from "@/components/ui/skeleton";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useNoteActions, useNotes } from "@/hooks/use-notes";
+import { helpContent } from "@/lib/help-content";
+import { getSearchTerms, noteMatchesSearch } from "@/lib/note-search";
 import type { Note } from "@/types/note";
 
 const PAGE_SIZE = 6;
@@ -24,15 +26,12 @@ export default function NotesPage() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [deleteTarget, setDeleteTarget] = useState<Note | null>(null);
-  const debouncedQuery = useDebounce(query, 200);
+  const debouncedQuery = useDebounce(query, 300);
+  const searchTerms = useMemo(() => getSearchTerms(debouncedQuery), [debouncedQuery]);
 
   const filtered = useMemo(() => {
-    const normalized = debouncedQuery.toLowerCase().trim();
-    if (!normalized) {
-      return notes;
-    }
-    return notes.filter((note) => `${note.title} ${note.content} ${note.summary ?? ""}`.toLowerCase().includes(normalized));
-  }, [debouncedQuery, notes]);
+    return notes.filter((note) => noteMatchesSearch(note, searchTerms));
+  }, [notes, searchTerms]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const visible = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -43,6 +42,7 @@ export default function NotesPage() {
         eyebrow="All Notes"
         title="Browse your knowledge base"
         description="Filter, edit, summarize, and manage every note in one responsive workspace."
+        help={helpContent.notes}
         actions={
           <Link href="/notes/create" className={buttonClasses("primary")}>
             <FilePlus2 className="h-4 w-4" />
@@ -68,6 +68,7 @@ export default function NotesPage() {
                 isPending={pendingId === note.id}
                 onDelete={setDeleteTarget}
                 onSummarize={summarize}
+                searchTerms={searchTerms}
               />
             ))}
           </div>

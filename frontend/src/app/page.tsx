@@ -8,6 +8,7 @@ import { NoteCard } from "@/components/notes/note-card";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { NoteGridSkeleton } from "@/components/ui/skeleton";
+import { helpContent } from "@/lib/help-content";
 import { formatDate } from "@/lib/utils";
 import { useNoteActions, useNotes } from "@/hooks/use-notes";
 
@@ -22,6 +23,7 @@ export default function DashboardPage() {
         eyebrow="Dashboard"
         title="Your AI-powered note workspace"
         description="Capture ideas, generate summaries, and retrieve knowledge semantically from a clean command center."
+        help={helpContent.dashboard}
         actions={
           <>
             <Link href="/search" className={buttonClasses("secondary")}>

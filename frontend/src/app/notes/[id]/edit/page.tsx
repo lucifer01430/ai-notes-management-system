@@ -10,6 +10,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { NoteForm } from "@/components/notes/note-form";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getApiErrorMessage, notesApi } from "@/lib/api";
+import { helpContent } from "@/lib/help-content";
 import type { NoteFormValues } from "@/lib/schemas";
 import type { Note } from "@/types/note";
 
@@ -54,7 +55,12 @@ export default function EditNotePage() {
         <ArrowLeft className="h-4 w-4" />
         Back to note
       </Link>
-      <PageHeader eyebrow="Edit Note" title="Refine your note" description="Update the source content. Generate a fresh summary from the detail page when needed." />
+      <PageHeader
+        eyebrow="Edit Note"
+        title="Refine your note"
+        description="Update the source content. Generate a fresh summary from the detail page when needed."
+        help={helpContent.edit}
+      />
       {isLoading ? <Skeleton className="h-96 w-full" /> : null}
       {!isLoading && note ? <NoteForm note={note} isSubmitting={isSubmitting} onSubmit={handleSubmit} /> : null}
     </AppShell>

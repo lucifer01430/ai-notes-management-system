@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getApiErrorMessage, notesApi } from "@/lib/api";
+import { helpContent } from "@/lib/help-content";
 import { searchSchema, type SearchFormValues } from "@/lib/schemas";
 import type { Note } from "@/types/note";
 
@@ -49,6 +50,7 @@ export default function SemanticSearchPage() {
         eyebrow="Semantic Search"
         title="Ask for ideas by meaning"
         description="Search naturally. Gemini embeddings compare your question with stored note vectors and rank the closest matches."
+        help={helpContent.semanticSearch}
       />
 
       <Card>

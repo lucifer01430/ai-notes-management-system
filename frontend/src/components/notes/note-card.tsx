@@ -6,6 +6,8 @@ import { Edit3, Eye, Sparkles, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { HighlightText } from "@/components/search/highlight-text";
+import { searchExcerpt } from "@/lib/note-search";
 import { excerpt, formatDate, readingTime } from "@/lib/utils";
 import type { Note } from "@/types/note";
 
@@ -15,9 +17,13 @@ interface NoteCardProps {
   onSummarize?: (note: Note) => void;
   isPending?: boolean;
   showScore?: boolean;
+  searchTerms?: string[];
 }
 
-export function NoteCard({ note, onDelete, onSummarize, isPending, showScore }: NoteCardProps) {
+export function NoteCard({ note, onDelete, onSummarize, isPending, showScore, searchTerms = [] }: NoteCardProps) {
+  const visibleContent = searchExcerpt(note.content, searchTerms, 220);
+  const visibleSummary = note.summary ? searchExcerpt(note.summary, searchTerms, 130) : null;
+
   return (
     <motion.article initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
       <Card className="group h-full transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-zinc-950/[0.06] dark:hover:shadow-black/20">
@@ -25,7 +31,7 @@ export function NoteCard({ note, onDelete, onSummarize, isPending, showScore }: 
           <div className="flex items-start justify-between gap-3">
             <Link href={`/notes/${note.id}`} className="min-w-0">
               <h3 className="line-clamp-2 text-base font-semibold tracking-tight text-zinc-950 transition group-hover:text-zinc-700 dark:text-white dark:group-hover:text-zinc-200">
-                {note.title}
+                <HighlightText text={note.title} terms={searchTerms} />
               </h3>
             </Link>
             {showScore && typeof note.similarity_score === "number" ? (
@@ -33,7 +39,9 @@ export function NoteCard({ note, onDelete, onSummarize, isPending, showScore }: 
             ) : null}
           </div>
 
-          <p className="mt-3 line-clamp-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{excerpt(note.content, 220)}</p>
+          <p className="mt-3 line-clamp-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            <HighlightText text={visibleContent} terms={searchTerms} />
+          </p>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <Badge>{readingTime(note.content)} min read</Badge>
@@ -43,7 +51,7 @@ export function NoteCard({ note, onDelete, onSummarize, isPending, showScore }: 
 
           {note.summary ? (
             <div className="mt-4 rounded-xl bg-zinc-50 p-3 text-sm leading-6 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-              {excerpt(note.summary, 130)}
+              <HighlightText text={visibleSummary ?? excerpt(note.summary, 130)} terms={searchTerms} />
             </div>
           ) : null}
 

@@ -14,6 +14,7 @@ import { Button, buttonClasses } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getApiErrorMessage, notesApi } from "@/lib/api";
+import { helpContent } from "@/lib/help-content";
 import { formatDate, readingTime } from "@/lib/utils";
 import type { Note } from "@/types/note";
 
@@ -89,6 +90,7 @@ export default function ViewNotePage() {
             eyebrow={`Updated ${formatDate(note.updated_at)}`}
             title={note.title}
             description={`${readingTime(note.content)} min read`}
+            help={helpContent.view}
             actions={
               <>
                 <Link href={`/notes/${note.id}/edit`} className={buttonClasses("secondary")}>

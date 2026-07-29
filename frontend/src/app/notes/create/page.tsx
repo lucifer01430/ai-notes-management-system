@@ -6,6 +6,7 @@ import { AppShell } from "@/components/layout/app-shell";
 import { PageHeader } from "@/components/layout/page-header";
 import { NoteForm } from "@/components/notes/note-form";
 import { getApiErrorMessage } from "@/lib/api";
+import { helpContent } from "@/lib/help-content";
 import type { NoteFormValues } from "@/lib/schemas";
 import { useNoteActions } from "@/hooks/use-notes";
 import { useState } from "react";
@@ -34,6 +35,7 @@ export default function CreateNotePage() {
         eyebrow="Create Note"
         title="Capture something worth remembering"
         description="Write clearly now, then let Gemini summarize and retrieve it later."
+        help={helpContent.create}
       />
       <NoteForm isSubmitting={isSubmitting} onSubmit={handleSubmit} />
     </AppShell>
